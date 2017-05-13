@@ -52,6 +52,6 @@ public class Amiibo {
     }
 
     public String getPhotoFilename(){
-        return "IMG_" +getId().toString() + ".jpg";
+        return "IMG_" + getId().toString() + ".jpg";
     }
 }
