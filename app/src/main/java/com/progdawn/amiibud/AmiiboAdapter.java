@@ -29,10 +29,10 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
         }
     }
 
-    private List<TestAmiibo> mAmiibos;
+    private List<Amiibo> mAmiibos;
     private Context mContext;
 
-    public AmiiboAdapter(Context context, List<TestAmiibo> amiibos){
+    public AmiiboAdapter(Context context, List<Amiibo> amiibos){
         mAmiibos = amiibos;
         mContext = context;
     }
@@ -52,7 +52,7 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(AmiiboAdapter.ViewHolder holder, int position) {
-        TestAmiibo amiibo = mAmiibos.get(position);
+        Amiibo amiibo = mAmiibos.get(position);
         TextView nameText = holder.nameTextView;
         TextView seriesText = holder.seriesTextView;
         nameText.setText(amiibo.getName());

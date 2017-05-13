@@ -4,15 +4,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-    <TextView
+    <EditText
         android:id="@+id/new_amiibo_name"
-        android:text="snap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <EditText
         android:id="@+id/new_amiibo_series"
-        android:text="yay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AmiiboActivity" >
+        <activity android:name=".NewAmiiboActivity" >
         </activity>
     </application>
 

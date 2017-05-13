@@ -1,5 +1,6 @@
 package com.progdawn.amiibud;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +13,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<TestAmiibo> amiibos;
+
+    private List<Amiibo> mAmiibos;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAmiibos = Collection.get(MainActivity.this).getAmiibos();
         RecyclerView rvAmiibos = (RecyclerView)findViewById(R.id.amiibo_recycler_view);
-        amiibos = TestAmiibo.createAmiibosList(20);
-        AmiiboAdapter adapter = new AmiiboAdapter(this, amiibos);
+        AmiiboAdapter adapter = new AmiiboAdapter(this, mAmiibos);
+
         rvAmiibos.setAdapter(adapter);
         rvAmiibos.setLayoutManager(new LinearLayoutManager(this));
 
@@ -28,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AmiiboActivity.class));
+                Intent intent = new Intent(MainActivity.this, NewAmiiboActivity.class);
+                startActivity(intent);
             }
         });
     }
+
 }
