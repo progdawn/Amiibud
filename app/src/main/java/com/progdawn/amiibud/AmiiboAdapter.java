@@ -1,5 +1,6 @@
 package com.progdawn.amiibud;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,51 +14,49 @@ import java.util.List;
  * Created by Dawn Myers on 5/13/2017.
  */
 
+//https://guides.codepath.com/android/using-the-recyclerview
 public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder>{
-    private List<Amiibo> mAmiibos;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView nameText;
-        public TextView seriesText;
-        public ImageView amiiboThumbnail;
-        public View layout;
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView nameTextView;
+        public TextView seriesTextView;
 
-        public ViewHolder(View v){
-            super(v);
-            layout = v;
-            nameText = (TextView)v.findViewById(R.id.amiibo_name);
-            seriesText = (TextView)v.findViewById(R.id.amiibo_series);
-            amiiboThumbnail = (ImageView)v.findViewById(R.id.amiibo_thumbnail);
+        public ViewHolder(View itemView){
+            super(itemView);
+
+            nameTextView = (TextView)itemView.findViewById(R.id.amiibo_name);
+            seriesTextView = (TextView)itemView.findViewById(R.id.amiibo_series);
         }
     }
 
-    public void add(int position, Amiibo item){
-        mAmiibos.add(position, item);
-        notifyItemInserted(position);
+    private List<TestAmiibo> mAmiibos;
+    private Context mContext;
+
+    public AmiiboAdapter(Context context, List<TestAmiibo> amiibos){
+        mAmiibos = amiibos;
+        mContext = context;
     }
 
-    public void remove(int position){
-        mAmiibos.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public AmiiboAdapter(List<Amiibo> dataSet){
-        mAmiibos = dataSet;
-    }
-
-    public AmiiboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        View v = inflater.inflate(R.layout.amiibo_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+    private Context getContext(){
+        return mContext;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Amiibo amiibo = mAmiibos.get(position);
-        holder.nameText.setText(amiibo.getName());
-        holder.seriesText.setText(amiibo.getSeries());
+    public AmiiboAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View amiiboView = inflater.inflate(R.layout.amiibo_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(amiiboView);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(AmiiboAdapter.ViewHolder holder, int position) {
+        TestAmiibo amiibo = mAmiibos.get(position);
+        TextView nameText = holder.nameTextView;
+        TextView seriesText = holder.seriesTextView;
+        nameText.setText(amiibo.getName());
+        seriesText.setText(amiibo.getSeries());
     }
 
     @Override

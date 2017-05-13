@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -13,15 +14,11 @@
         android:layout_height="match_parent" />
 
 
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_amiibo"
+        android:src="@drawable/ic_action_add"
+        app:elevation="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
-        android:elevation="2dp"
-        android:src="@drawable/ic_action_add" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
