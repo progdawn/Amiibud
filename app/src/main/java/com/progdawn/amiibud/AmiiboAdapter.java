@@ -1,6 +1,7 @@
 package com.progdawn.amiibud;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
 
     private List<Amiibo> mAmiibos;
     private Context mContext;
+    private File mPhotoFile;
 
     public AmiiboAdapter(Context context, List<Amiibo> amiibos){
         mAmiibos = amiibos;
@@ -74,4 +76,14 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
     public void setAmiibos(List<Amiibo> amiibos){
         mAmiibos = amiibos;
     }
+
+ /*   public void setImageView(Amiibo amiibo,  ImageView image){
+        mPhotoFile = Collection.get(mContext).getPhotoFile(amiibo);
+        if(mPhotoFile == null || !mPhotoFile.exists()){
+            image.setImageDrawable(null);
+        }else{
+            Bitmap pictureBitmap = PictureUtils.getScaledBitmap(amiibo.getPhotoFilename().toString(), AmiiboAdapter.this);
+            mPhotoView.setImageBitmap(pictureBitmap);
+        }
+    }*/
 }
