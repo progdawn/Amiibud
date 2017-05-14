@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -20,12 +23,14 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView nameTextView;
         public TextView seriesTextView;
+        public ImageView thumbnailImageView;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             nameTextView = (TextView)itemView.findViewById(R.id.amiibo_name);
             seriesTextView = (TextView)itemView.findViewById(R.id.amiibo_series);
+            thumbnailImageView = (ImageView)itemView.findViewById(R.id.amiibo_thumbnail);
         }
     }
 
@@ -55,8 +60,10 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
         Amiibo amiibo = mAmiibos.get(position);
         TextView nameText = holder.nameTextView;
         TextView seriesText = holder.seriesTextView;
+        ImageView thumbnail = holder.thumbnailImageView;
         nameText.setText(amiibo.getName());
         seriesText.setText(amiibo.getSeries());
+        Picasso.with(mContext).load(new File(amiibo.getPhotoFilename())).placeholder(R.mipmap.ic_launcher).into(thumbnail);
     }
 
     @Override

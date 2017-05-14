@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Amiibud</string>
     <string name="thumbnail_description">Amiibo</string>
+    <string name="amiibo_name_hint">Enter name of Amiibo</string>
+    <string name="amiibo_series_hint">Enter series of Amiibo</string>
 </resources>

@@ -25,11 +25,8 @@ public class MainActivity extends AppCompatActivity {
         mAmiibos = Collection.get(MainActivity.this).getAmiibos();
         RecyclerView mRecyclerView = (RecyclerView)findViewById(R.id.amiibo_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mAdapter = new AmiiboAdapter(this, mAmiibos);
         mRecyclerView.setAdapter(mAdapter);
-        updateUI();
-
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.add_amiibo);
         fab.setOnClickListener(new View.OnClickListener() {
