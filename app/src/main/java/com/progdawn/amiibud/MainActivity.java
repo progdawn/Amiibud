@@ -13,8 +13,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private List<Amiibo> mAmiibos;
+    AmiiboAdapter mAdapter;
+    RecyclerView mRecyclerView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAmiibos = Collection.get(MainActivity.this).getAmiibos();
-        RecyclerView rvAmiibos = (RecyclerView)findViewById(R.id.amiibo_recycler_view);
-        AmiiboAdapter adapter = new AmiiboAdapter(this, mAmiibos);
+        RecyclerView mRecyclerView = (RecyclerView)findViewById(R.id.amiibo_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        rvAmiibos.setAdapter(adapter);
-        rvAmiibos.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new AmiiboAdapter(this, mAmiibos);
+        mRecyclerView.setAdapter(mAdapter);
+        updateUI();
+
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.add_amiibo);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,4 +41,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
+    private void updateUI(){
+        Collection collection = Collection.get(MainActivity.this);
+        mAmiibos = collection.getAmiibos();
+
+        if(mAdapter == null){
+            mAdapter = new AmiiboAdapter(MainActivity.this, mAmiibos);
+            mRecyclerView.setAdapter(mAdapter);
+        }else{
+            mAdapter.setAmiibos(mAmiibos);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 }

@@ -63,4 +63,8 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
     public int getItemCount() {
         return mAmiibos.size();
     }
+
+    public void setAmiibos(List<Amiibo> amiibos){
+        mAmiibos = amiibos;
+    }
 }
