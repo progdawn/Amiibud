@@ -17,15 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Dawn Myers on 5/13/2017.
@@ -41,7 +33,6 @@ public class NewAmiiboActivity extends AppCompatActivity{
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
-    private Uri selectedPhotoPath;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,10 +101,7 @@ public class NewAmiiboActivity extends AppCompatActivity{
     private void takePictureWithCamera(){
         Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri uri = FileProvider.getUriForFile(NewAmiiboActivity.this, "com.progdawn.android.amiibud.fileprovider", mPhotoFile);
-        //File photoFile = Collection.get(NewAmiiboActivity.this).getPhotoFile(mAmiibo);
-        //selectedPhotoPath = Uri.parse(photoFile.getAbsolutePath());
 
-        //captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(captureIntent, REQUEST_PHOTO);
     }
@@ -131,7 +119,6 @@ public class NewAmiiboActivity extends AppCompatActivity{
         if(mPhotoFile == null || !mPhotoFile.exists()){
             mPhotoView.setImageDrawable(null);
         }else{
-            //Bitmap pictureBitmap = PictureUtils.getScaledBitmap(selectedPhotoPath, NewAmiiboActivity.this);
             Bitmap pictureBitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), NewAmiiboActivity.this);
             mPhotoView.setImageBitmap(pictureBitmap);
         }

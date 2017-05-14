@@ -11,7 +11,7 @@
 
         <ImageView
             android:id="@+id/amiibo_picture"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             android:cropToPadding="true"
             android:background="@android:color/darker_gray"
             android:layout_width="match_parent"

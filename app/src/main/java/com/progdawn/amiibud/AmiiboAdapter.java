@@ -2,6 +2,8 @@ package com.progdawn.amiibud;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,12 +62,16 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
     @Override
     public void onBindViewHolder(AmiiboAdapter.ViewHolder holder, int position) {
         Amiibo amiibo = mAmiibos.get(position);
+        mPhotoFile = Collection.get(mContext).getPhotoFile(amiibo);
+        Uri uri = FileProvider.getUriForFile(mContext, "com.progdawn.android.amiibud.fileprovider", mPhotoFile);
+
+
         TextView nameText = holder.nameTextView;
         TextView seriesText = holder.seriesTextView;
         ImageView thumbnail = holder.thumbnailImageView;
         nameText.setText(amiibo.getName());
         seriesText.setText(amiibo.getSeries());
-        Picasso.with(mContext).load(new File(amiibo.getPhotoFilename())).placeholder(R.mipmap.ic_launcher).into(thumbnail);
+        Picasso.with(mContext).load(uri).resize(400, 400).centerCrop().placeholder(R.mipmap.ic_launcher).into(thumbnail);
     }
 
     @Override
@@ -76,14 +82,4 @@ public class AmiiboAdapter extends RecyclerView.Adapter<AmiiboAdapter.ViewHolder
     public void setAmiibos(List<Amiibo> amiibos){
         mAmiibos = amiibos;
     }
-
- /*   public void setImageView(Amiibo amiibo,  ImageView image){
-        mPhotoFile = Collection.get(mContext).getPhotoFile(amiibo);
-        if(mPhotoFile == null || !mPhotoFile.exists()){
-            image.setImageDrawable(null);
-        }else{
-            Bitmap pictureBitmap = PictureUtils.getScaledBitmap(amiibo.getPhotoFilename().toString(), AmiiboAdapter.this);
-            mPhotoView.setImageBitmap(pictureBitmap);
-        }
-    }*/
 }
